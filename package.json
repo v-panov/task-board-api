@@ -1,0 +1,58 @@
+{
+  "name": "task-board-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "NODE_ENV=test jest",
+    "start": "nodemon --watch src --inspect index.js",
+    "build": "NODE_ENV=production webpack -p --config ./config/webpack.server.config.js",
+    "docker-build": "docker build -f Dockerfile -t task-board-api . --build-arg NODE_ENV='production'",
+    "docker-run": "docker run -p 8082:80"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/v-panov/task-board-api.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/v-panov/task-board-api/issues"
+  },
+  "homepage": "https://github.com/v-panov/task-board-api#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "boom": "^7.3.0",
+    "cookie-parser": "^1.4.4",
+    "dotenv": "^8.0.0",
+    "express": "^4.17.1",
+    "helmet": "^3.18.0",
+    "jsonwebtoken": "^8.5.1",
+    "pg": "^7.10.0",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^5.8.3"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.4.4",
+    "@babel/plugin-proposal-decorators": "^7.4.4",
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
+    "@babel/plugin-transform-runtime": "^7.4.4",
+    "@babel/preset-env": "^7.4.4",
+    "@babel/register": "^7.4.4",
+    "@babel/runtime": "^7.4.4",
+    "babel-eslint": "^10.0.1",
+    "babel-jest": "^24.7.1",
+    "babel-loader": "^8.0.6",
+    "eslint": "^5.3.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.17.2",
+    "jest": "^24.7.1",
+    "nodemon": "^1.19.0",
+    "sqlite3": "^4.0.8",
+    "supertest": "^4.0.2",
+    "webpack": "^4.32.2",
+    "webpack-cli": "^3.3.2",
+    "webpack-node-externals": "^1.7.2"
+  }
+}
