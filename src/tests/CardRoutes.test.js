@@ -56,6 +56,7 @@ describe('REST /api/cards', () => {
       title: 'Card title',
       description: 'Card description',
       priority: 1,
+      boardId: board.id,
       laneId: lane.id,
     };
 
@@ -64,8 +65,9 @@ describe('REST /api/cards', () => {
       .set('Cookie', [`access_token=${token}`])
       .send(cardData);
 
-    expect.assertions(5);
+    expect.assertions(6);
     expect(response.statusCode).toBe(200);
+    expect(response.body.boardId).toBe(cardData.boardId);
     expect(response.body.laneId).toBe(cardData.laneId);
     expect(response.body.title).toBe(cardData.title);
     expect(response.body.description).toBe(cardData.description);
@@ -77,6 +79,7 @@ describe('REST /api/cards', () => {
       title: 'Card title',
       description: 'Card description',
       priority: 1,
+      boardId: board.id,
       laneId: lane.id,
     };
 
@@ -97,8 +100,9 @@ describe('REST /api/cards', () => {
       .set('Cookie', [`access_token=${token}`])
       .send(updateCardData);
 
-    expect.assertions(5);
+    expect.assertions(6);
     expect(response.statusCode).toBe(200);
+    expect(response.body.boardId).toBe(updateCardData.boardId);
     expect(response.body.laneId).toBe(updateCardData.laneId);
     expect(response.body.title).toBe(updateCardData.title);
     expect(response.body.description).toBe(updateCardData.description);
@@ -110,6 +114,7 @@ describe('REST /api/cards', () => {
       title: 'Card title',
       description: 'Card description',
       priority: 1,
+      boardId: board.id,
       laneId: lane.id,
     };
 
@@ -132,6 +137,7 @@ describe('REST /api/cards', () => {
       title: 'Card title',
       description: 'Card description',
       priority: 1,
+      boardId: board.id,
       laneId: lane.id,
     };
 

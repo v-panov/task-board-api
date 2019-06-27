@@ -15,23 +15,20 @@ export function getById(id) {
     include: [
       {
         model: Lane,
+      },
+      {
+        model: Card,
         include: [
           {
-            model: Card,
-            include: [
-              {
-                model: User,
-                as: 'members',
-                attributes: ['id', 'firstName', 'lastName', 'fullName', 'initials'],
-                through: {
-                  attributes: [],
-                },
-              },
-            ],
+            model: User,
+            as: 'members',
+            attributes: ['id', 'firstName', 'lastName', 'fullName', 'initials'],
+            through: {
+              attributes: [],
+            },
           },
         ],
-      },
-    ],
+      }],
   });
 }
 

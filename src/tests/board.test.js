@@ -32,30 +32,28 @@ describe('Database', () => {
       title: 'Lane title',
       description: 'Lane description',
       priority: 1,
+      boardId: board.id,
     });
 
     await lane.addCard(card);
     await card.addMember(user);
   });
 
-  it('board contains lanes with cards', async () => {
+  it('board contains cards and lanes', async () => {
     const board = await Board.findOne({
       include: [
         {
           model: Lane,
           attributes: ['id'],
-          include: [
-            {
-              model: Card,
-              attributes: ['id'],
-            },
-          ],
         },
-      ],
+        {
+          model: Card,
+          attributes: ['id'],
+        }],
     });
 
     expect(board.lanes.length).not.toBe(0);
-    expect(board.lanes[0].cards.length).not.toBe(0);
+    expect(board.cards.length).not.toBe(0);
   });
 
   it('lane contains cards', async () => {
@@ -70,14 +68,15 @@ describe('Database', () => {
     expect(lane.cards.length).not.toBe(0);
   });
 
-  // it('card and lane belongs to the same board', async () => {
-  //   const board = await Board.findOne({});
-  //   const lane = await Lane.findOne({});
-  //   const card = await Card.findOne({});
-  //
-  //   expect(lane.boardId).toBe(board.id);
-  //   expect(card.boardId).toBe(lane.boardId);
-  // });
+  it('card and lane belongs to the same board', async () => {
+    const board = await Board.findOne({});
+    const lane = await Lane.findOne({});
+    const card = await Card.findOne({});
+
+    expect(card.boardId).toBe(board.id);
+    expect(lane.boardId).toBe(board.id);
+    expect(card.boardId).toBe(lane.boardId);
+  });
 
   it('card has members', async () => {
     const card = await Card.findOne({

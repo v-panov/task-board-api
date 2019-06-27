@@ -22,7 +22,7 @@ import InitAssociations from '../decorators/InitAssociations';
 )
 @InitAssociations(({ comment, card, user }) => {
   card.hasMany(comment, { foreignKey: 'cardId' });
-  comment.hasOne(user, { as: 'member', foreignKey: 'userId' });
+  comment.belongsTo(user, { as: 'member', foreignKey: 'userId' });
 })
 class Comment extends Model {
 }

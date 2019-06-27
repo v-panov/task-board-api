@@ -5,19 +5,20 @@ const router = express.Router();
 
 router.post('/', async (req, res) => {
   const { user: { id } } = req;
-  const cardData = req.body;
-  const card = await CommentService.create(id, cardData);
-  res.json(card);
+  const commentData = req.body;
+  const comment = await CommentService.create(commentData, id);
+  res.json(comment);
 });
 
 router.put('/', async (req, res) => {
-  const cardData = req.body;
-  const card = await CommentService.update(cardData);
-  res.json(card);
+  const { user: { id } } = req;
+  const commentData = req.body;
+  const comment = await CommentService.update(commentData, id);
+  res.json(comment);
 });
 
-router.delete('/', async (req, res) => {
-  const { id } = req.query;
+router.delete('/:id', async (req, res) => {
+  const { id } = req.params;
   await CommentService.remove(id);
   res.sendStatus(200);
 });

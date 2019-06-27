@@ -50,6 +50,7 @@ describe('REST /api/boards', () => {
       title: 'Card title',
       description: 'Card description',
       priority: 1,
+      boardId: createdBoard.id,
       laneId: createdLane.id,
     };
 
@@ -70,7 +71,7 @@ describe('REST /api/boards', () => {
       .get(`/api/boards/${createdBoard.id}`)
       .set('Cookie', [`access_token=${token}`]);
 
-    expect.assertions(13);
+    expect.assertions(14);
     expect(response.statusCode).toBe(200);
     expect(response.body.title).toBe(boardData.title);
 
@@ -79,14 +80,15 @@ describe('REST /api/boards', () => {
     expect(response.body.lanes[0].boardId).toBe(laneData.boardId);
     expect(response.body.lanes[0].description).toBe(laneData.description);
 
-    expect(response.body.lanes[0].cards.length).toBe(1);
-    expect(response.body.lanes[0].cards[0].title).toBe(cardData.title);
-    expect(response.body.lanes[0].cards[0].description).toBe(cardData.description);
-    expect(response.body.lanes[0].cards[0].laneId).toBe(cardData.laneId);
-    expect(response.body.lanes[0].cards[0].priority).toBe(cardData.priority);
+    expect(response.body.cards.length).toBe(1);
+    expect(response.body.cards[0].title).toBe(cardData.title);
+    expect(response.body.cards[0].description).toBe(cardData.description);
+    expect(response.body.cards[0].boardId).toBe(cardData.boardId);
+    expect(response.body.cards[0].laneId).toBe(cardData.laneId);
+    expect(response.body.cards[0].priority).toBe(cardData.priority);
 
-    expect(response.body.lanes[0].cards[0].members.length).toBe(1);
-    expect(response.body.lanes[0].cards[0].members[0].id).toBe(cardMember.id);
+    expect(response.body.cards[0].members.length).toBe(1);
+    expect(response.body.cards[0].members[0].id).toBe(cardMember.id);
   });
 
   it('GET /api/boards it should return user boards', async () => {

@@ -21,10 +21,12 @@ import InitModel from '../decorators/InitModel';
 )
 @InitAssociations((
   {
-    board, lane, user,
+    board, lane, card, user,
   },
 ) => {
   board.hasMany(lane, { foreignKey: 'boardId' });
+
+  board.hasMany(card, { foreignKey: 'boardId' });
 
   board.belongsToMany(user, { as: 'members', through: 'user_board', foreignKey: 'boardId' });
 })
